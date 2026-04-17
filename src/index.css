@@ -1,3 +1,63 @@
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #000000;
+    --card: #ffffff;
+    --card-foreground: #000000;
+    --muted: #f0f0f0;
+    --muted-foreground: #666666;
+    --accent: #0066ff;
+    --accent-foreground: #ffffff;
+    --border: #000000;
+    --input: #000000;
+    --ring: #ff3333;
+    --radius: 0px;
+    --chart-1: #ff3333;
+    --chart-2: #ffff00;
+    --chart-3: #0066ff;
+    --chart-4: #00cc00;
+    --chart-5: #cc00cc;
+  }
+
+  .dark {
+    --background: #0a0a0a;
+    --foreground: #ffffff;
+    --card: #111111;
+    --card-foreground: #ffffff;
+    --muted: #1c1c1c;
+    --muted-foreground: #888888;
+    --accent: #0066ff;
+    --accent-foreground: #ffffff;
+    --border: #333333;
+    --input: #333333;
+    --ring: #ff3333;
+    --radius: 0px;
+    --chart-1: #ff3333;
+    --chart-2: #ffff00;
+    --chart-3: #0066ff;
+    --chart-4: #00cc00;
+    --chart-5: #cc00cc;
+  }
+
+  html {
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}

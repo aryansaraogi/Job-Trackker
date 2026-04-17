@@ -1,3 +1,4 @@
+import { Bell, Paperclip, Pencil, Trash2 } from 'lucide-react'
 import type { JobApplication } from '../types'
 import { StatusBadge } from './StatusBadge'
 
@@ -29,33 +30,39 @@ export function JobCard({ application, onEdit, onDelete }: JobCardProps) {
   const showReminder = isReminderDue(application)
 
   return (
-    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3.5 flex items-center justify-between gap-4">
+    <div className="bg-card border border-border px-5 py-4 flex items-center justify-between gap-4 hover:border-accent transition-colors duration-150 group">
       <div className="min-w-0">
         <div className="flex items-center gap-2">
-          <p className="font-semibold text-gray-900 dark:text-gray-100 truncate">{company}</p>
-          {showReminder && <span title="Follow-up reminder due" className="text-sm">🔔</span>}
+          <p className="font-semibold text-card-foreground truncate">{company}</p>
+          {showReminder && (
+            <span title="Follow-up reminder due" className="shrink-0">
+              <Bell size={12} className="text-chart-1" />
+            </span>
+          )}
           {resumeUrl && (
-            <a href={resumeUrl} target="_blank" rel="noreferrer" title="View resume" className="text-sm hover:opacity-75 transition-opacity">
-              📎
+            <a href={resumeUrl} target="_blank" rel="noreferrer" title="View resume" className="text-muted-foreground hover:text-foreground transition-colors shrink-0">
+              <Paperclip size={12} />
             </a>
           )}
         </div>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 truncate">{role}</p>
-        <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Applied: {formatted}</p>
+        <p className="text-sm text-muted-foreground mt-0.5 truncate">{role}</p>
+        <p className="text-xs text-muted-foreground/60 mt-1 tabular-nums">Applied {formatted}</p>
       </div>
-      <div className="flex items-center gap-2 shrink-0">
+      <div className="flex items-center gap-1.5 shrink-0">
         <StatusBadge status={status} />
         <button
           onClick={() => onEdit(application)}
-          className="border border-gray-200 dark:border-gray-600 rounded px-2 py-1 text-xs text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          title="Edit"
+          className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors border border-transparent hover:border-border"
         >
-          ✏️ Edit
+          <Pencil size={13} />
         </button>
         <button
           onClick={handleDelete}
-          className="border border-gray-200 dark:border-gray-600 rounded px-2 py-1 text-xs text-gray-500 dark:text-gray-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 transition-colors"
+          title="Delete"
+          className="p-1.5 text-muted-foreground hover:text-ring hover:bg-ring/10 transition-colors border border-transparent hover:border-ring"
         >
-          🗑 Delete
+          <Trash2 size={13} />
         </button>
       </div>
     </div>

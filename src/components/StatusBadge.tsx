@@ -1,15 +1,18 @@
 import type { Status } from '../types'
 
-const styles: Record<Status, string> = {
-  Applied: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300',
-  Interview: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
-  Offer: 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300',
-  Rejected: 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300',
+const styles: Record<Status, React.CSSProperties> = {
+  Applied:   { backgroundColor: 'var(--chart-3)', color: '#ffffff' },
+  Interview: { backgroundColor: 'var(--chart-2)', color: '#000000' },
+  Offer:     { backgroundColor: 'var(--chart-4)', color: '#000000' },
+  Rejected:  { backgroundColor: 'var(--chart-1)', color: '#ffffff' },
 }
 
 export function StatusBadge({ status }: { status: Status }) {
   return (
-    <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${styles[status]}`}>
+    <span
+      className="px-2 py-0.5 text-xs font-semibold tracking-wide uppercase"
+      style={styles[status]}
+    >
       {status}
     </span>
   )

@@ -7,10 +7,10 @@ interface StatusPieChartProps {
 }
 
 const COLORS: Record<Status, string> = {
-  Applied: '#3b82f6',
-  Interview: '#f59e0b',
-  Offer: '#22c55e',
-  Rejected: '#ef4444',
+  Applied:   '#0066ff',
+  Interview: '#ffff00',
+  Offer:     '#00cc00',
+  Rejected:  '#ff3333',
 }
 
 const STATUSES: Status[] = ['Applied', 'Interview', 'Offer', 'Rejected']
@@ -21,11 +21,13 @@ export function StatusPieChart({ applications, isDark }: StatusPieChartProps) {
     value: applications.filter(a => a.status === status).length,
   })).filter(d => d.value > 0)
 
-  const textColor = isDark ? '#d1d5db' : '#374151'
+  const textColor = isDark ? '#888888' : '#666666'
+  const bgColor = isDark ? '#111111' : '#ffffff'
+  const borderColor = isDark ? '#333333' : '#000000'
 
   return (
-    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5">
-      <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">Applications by Status</h3>
+    <div className="bg-card border border-border p-5">
+      <h3 className="text-xs font-semibold text-muted-foreground mb-4 uppercase tracking-widest">Applications by Status</h3>
       <ResponsiveContainer width="100%" height={260}>
         <PieChart>
           <Pie
@@ -35,7 +37,9 @@ export function StatusPieChart({ applications, isDark }: StatusPieChartProps) {
             innerRadius={60}
             outerRadius={100}
             dataKey="value"
-            paddingAngle={2}
+            paddingAngle={0}
+            strokeWidth={2}
+            stroke={bgColor}
           >
             {data.map(entry => (
               <Cell key={entry.name} fill={COLORS[entry.name as Status]} />
@@ -43,9 +47,11 @@ export function StatusPieChart({ applications, isDark }: StatusPieChartProps) {
           </Pie>
           <Tooltip
             contentStyle={{
-              backgroundColor: isDark ? '#1f2937' : '#fff',
-              border: `1px solid ${isDark ? '#374151' : '#e5e7eb'}`,
+              backgroundColor: bgColor,
+              border: `1px solid ${borderColor}`,
               color: textColor,
+              borderRadius: 0,
+              fontSize: 12,
             }}
           />
           <Legend

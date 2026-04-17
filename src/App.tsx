@@ -37,23 +37,23 @@ function AppContent() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-        <p className="text-gray-400 dark:text-gray-500">Loading…</p>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-muted-foreground">Loading…</p>
       </div>
     )
   }
 
   if (!currentUser) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen bg-background">
         <AuthModal />
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
-      <div className="max-w-4xl mx-auto px-4 py-6">
+    <div className="min-h-screen bg-background transition-colors">
+      <div className="max-w-3xl mx-auto px-4 py-6">
         <Header isDark={isDark} onToggleDark={toggle} onAdd={openAdd} />
         <Routes>
           <Route

@@ -12,7 +12,7 @@ export function KPICards({ applications }: KPICardsProps) {
   const offerRate = total > 0 ? Math.round((offers / total) * 100) : 0
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 border border-border mb-8 divide-x divide-border sm:divide-y-0 divide-y">
       <KPICard label="Total Applications" value={total} />
       <KPICard label="Response Rate" value={`${responseRate}%`} />
       <KPICard label="Offer Rate" value={`${offerRate}%`} />
@@ -22,9 +22,9 @@ export function KPICards({ applications }: KPICardsProps) {
 
 function KPICard({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5">
-      <p className="text-sm text-gray-500 dark:text-gray-400">{label}</p>
-      <p className="text-3xl font-bold text-gray-900 dark:text-gray-100 mt-1">{value}</p>
+    <div className="bg-card p-5 hover:bg-muted transition-colors">
+      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest">{label}</p>
+      <p className="text-4xl font-bold tracking-tight text-card-foreground mt-2">{value}</p>
     </div>
   )
 }
