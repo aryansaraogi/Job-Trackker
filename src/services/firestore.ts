@@ -19,16 +19,24 @@ function appsCollection(userId: string) {
 
 export function subscribeToApplications(
   userId: string,
-  callback: (apps: JobApplication[]) => void
+  callback: (apps: JobApplication[]) => void,
+  onError?: (err: Error) => void
 ): Unsubscribe {
   const q = query(appsCollection(userId), orderBy('createdAt', 'desc'))
-  return onSnapshot(q, snapshot => {
-    const apps = snapshot.docs.map(d => ({
-      id: d.id,
-      ...d.data(),
-    })) as JobApplication[]
-    callback(apps)
-  })
+  return onSnapshot(
+    q,
+    snapshot => {
+      const apps = snapshot.docs.map(d => ({
+        id: d.id,
+        ...d.data(),
+      })) as JobApplication[]
+      callback(apps)
+    },
+    err => {
+      console.error('[Firestore] subscribeToApplications error:', err.code, err.message)
+      onError?.(err)
+    }
+  )
 }
 
 export async function addApplication(

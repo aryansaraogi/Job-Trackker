@@ -13,8 +13,8 @@ export function Header({ isDark, onToggleDark, onAdd }: HeaderProps) {
   const location = useLocation()
 
   return (
-    <header className="sticky top-0 z-40 bg-background/90 backdrop-blur-sm border-b border-border -mx-4 px-4 mb-6">
-      <div className="flex items-center justify-between h-14 flex-wrap gap-2">
+    <header className="sticky top-0 z-40 bg-background/90 backdrop-blur-sm border-b border-border -mx-8 px-8 mb-10">
+      <div className="flex items-center justify-between h-16 flex-wrap gap-2">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <Briefcase size={18} className="text-foreground" />

@@ -10,7 +10,10 @@
       "Bash(echo '{}')",
       "Bash(npm run *)",
       "Bash(curl -s http://localhost:5173)",
-      "Bash(start *)"
+      "Bash(start *)",
+      "Bash(node -e \"require\\('path'\\); console.log\\('ok'\\)\")",
+      "Bash(firebase deploy *)",
+      "Bash(firebase login *)"
     ]
   }
 }

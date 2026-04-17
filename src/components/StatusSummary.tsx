@@ -9,13 +9,13 @@ export function StatusSummary({ applications }: { applications: JobApplication[]
   }, { Applied: 0, Interview: 0, Offer: 0, Rejected: 0 })
 
   return (
-    <div className="flex items-stretch divide-x divide-border border border-border mb-4">
-      <div className="px-4 py-2.5 flex items-center gap-2">
-        <span className="text-sm font-bold text-foreground tabular-nums">{applications.length}</span>
+    <div className="flex items-stretch divide-x divide-border border border-border mb-6">
+      <div className="px-6 py-4 flex items-center gap-3">
+        <span className="text-base font-bold text-foreground tabular-nums">{applications.length}</span>
         <span className="text-xs text-muted-foreground uppercase tracking-wide">Total</span>
       </div>
       {STATUSES.map(s => (
-        <div key={s} className="px-4 py-2.5 flex items-center gap-2">
+        <div key={s} className="px-6 py-4 flex items-center gap-3">
           <span className="text-sm font-bold text-foreground tabular-nums">{counts[s]}</span>
           <span className="text-xs text-muted-foreground uppercase tracking-wide">{s}</span>
         </div>

@@ -30,7 +30,7 @@ export function JobCard({ application, onEdit, onDelete }: JobCardProps) {
   const showReminder = isReminderDue(application)
 
   return (
-    <div className="bg-card border border-border px-5 py-4 flex items-center justify-between gap-4 hover:border-accent transition-colors duration-150 group">
+    <div className="bg-card border border-border px-6 py-5 flex items-center justify-between gap-6 hover:border-accent transition-colors duration-150 group">
       <div className="min-w-0">
         <div className="flex items-center gap-2">
           <p className="font-semibold text-card-foreground truncate">{company}</p>

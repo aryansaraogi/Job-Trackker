@@ -12,10 +12,11 @@ import { JobList } from './components/JobList'
 import { JobFormModal } from './components/JobFormModal'
 import { AuthModal } from './components/AuthModal'
 import { AnalyticsPage } from './pages/AnalyticsPage'
+import { BGPattern } from '@/components/ui/bg-pattern'
 
 function AppContent() {
   const { currentUser, loading: authLoading } = useAuth()
-  const { applications, addApplication, updateApplication, deleteApplication } = useJobApplications(currentUser?.uid)
+  const { applications, firestoreError, addApplication, updateApplication, deleteApplication } = useJobApplications(currentUser?.uid)
   const { isDark, toggle } = useDarkMode()
   const [filter, setFilter] = useState<FilterValue>('All')
   const [modalState, setModalState] = useState<{ open: boolean; editing?: JobApplication }>({ open: false })
@@ -52,9 +53,27 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen bg-background transition-colors">
-      <div className="max-w-3xl mx-auto px-4 py-6">
+    <BGPattern
+      variant="dots"
+      mask="none"
+      size={2}
+      gap={20}
+      patternColor="currentColor"
+      patternOpacity={0.08}
+      className="min-h-screen bg-background transition-colors"
+    >
+      <div className="max-w-5xl mx-auto px-8 py-10">
         <Header isDark={isDark} onToggleDark={toggle} onAdd={openAdd} />
+        {firestoreError === 'permission-denied' && (
+          <div className="mb-6 border border-ring bg-ring/10 px-4 py-3 text-sm text-ring">
+            <strong>Firestore permission denied.</strong> Your security rules haven't been deployed yet. Run: <code className="font-mono bg-ring/10 px-1">firebase deploy --only firestore:rules</code>
+          </div>
+        )}
+        {firestoreError && firestoreError !== 'permission-denied' && (
+          <div className="mb-6 border border-ring bg-ring/10 px-4 py-3 text-sm text-ring">
+            <strong>Firestore error:</strong> {firestoreError}
+          </div>
+        )}
         <Routes>
           <Route
             path="/"
@@ -79,7 +98,7 @@ function AppContent() {
           onClose={closeModal}
         />
       )}
-    </div>
+    </BGPattern>
   )
 }
 

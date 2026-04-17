@@ -10,6 +10,7 @@ import {
 export function useJobApplications(userId: string | undefined) {
   const [applications, setApplications] = useState<JobApplication[]>([])
   const [loading, setLoading] = useState(true)
+  const [firestoreError, setFirestoreError] = useState<string | null>(null)
 
   useEffect(() => {
     if (!userId) {
@@ -18,10 +19,23 @@ export function useJobApplications(userId: string | undefined) {
       return
     }
     setLoading(true)
-    const unsubscribe = subscribeToApplications(userId, apps => {
-      setApplications(apps)
-      setLoading(false)
-    })
+    setFirestoreError(null)
+    const unsubscribe = subscribeToApplications(
+      userId,
+      apps => {
+        setApplications(apps)
+        setLoading(false)
+        setFirestoreError(null)
+      },
+      err => {
+        setLoading(false)
+        if (err.message.includes('permission') || err.message.includes('Missing or insufficient')) {
+          setFirestoreError('permission-denied')
+        } else {
+          setFirestoreError(err.message)
+        }
+      }
+    )
     return unsubscribe
   }, [userId])
 
@@ -43,5 +57,5 @@ export function useJobApplications(userId: string | undefined) {
     await fsDelete(userId, id)
   }
 
-  return { applications, loading, addApplication, updateApplication, deleteApplication }
+  return { applications, loading, firestoreError, addApplication, updateApplication, deleteApplication }
 }

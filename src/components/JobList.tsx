@@ -11,7 +11,7 @@ interface JobListProps {
 export function JobList({ applications, onEdit, onDelete }: JobListProps) {
   if (applications.length === 0) {
     return (
-      <div className="text-center py-16 text-muted-foreground border border-dashed border-border">
+      <div className="text-center py-24 text-muted-foreground border border-dashed border-border">
         <ClipboardList size={36} className="mx-auto mb-3 opacity-30" />
         <p className="text-sm">No applications yet. Click <strong className="text-foreground">Add Application</strong> to get started.</p>
       </div>
